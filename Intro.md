@@ -1,0 +1,9 @@
+# Dataset Introduction
+
+This paper introduces a novel multimodal evaluation dataset constructed from ACL 2024 long papers, specifically designed to assess the figure generation capabilities of large language models. Our dataset contains aligned pairs of paper titles, abstracts, arXiv IDs, first figures, and their corresponding captions extracted from the LaTeX source files of these academic papers.
+
+We systematically collected the dataset through a multi-step process: (1) scraping paper titles from the ACL 2024 Anthology, (2) retrieving corresponding arXiv identifiers through relevance-based searches, (3) downloading and extracting LaTeX source files, and (4) parsing these files to extract abstracts, first figures, and their captions while preserving the relationships between these elements.
+
+The dataset contains successfully extracted information from [number] papers out of [total] papers attempted. Each entry provides the complete context (paper title, abstract, and figure caption) that would typically inform the creation of the first figure in a computational linguistics paper. This context-rich structure enables a focused evaluation of how well large language models can interpret scientific text and generate appropriate visual representations.
+
+Our dataset specifically targets the challenging task of scientific figure generation, where models must demonstrate understanding of complex research concepts and translate them into informative visualizations based solely on textual descriptions. By providing paper abstracts, titles, and figure captions as input and evaluating against the actual figures from the papers, we create a benchmark for assessing how well LLMs can bridge the gap between scientific text understanding and visual content creation in the computational linguistics domain.
