@@ -90,7 +90,7 @@ def find_image_file(dir_path, exts=('.png','.jpg','.jpeg','.svg','.pdf')):
 def svg_to_png(svg_path: Path, dpi: int = 300) -> Path:
 
     tmp = Path(tempfile.gettempdir()) / (svg_path.stem + ".png")
-    # CairoSVG 接收 dpi=96 基准；换算一下
+   
     cairosvg.svg2png(url=str(svg_path),
                      write_to=str(tmp),
                      dpi=dpi)
