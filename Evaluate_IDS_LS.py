@@ -62,7 +62,7 @@ def nms(boxes, iou_th: float = 0.5):
 
 def count_objects_sam_yolo(img_bgr, sam_ckpt="sam_vit_h_4b8939.pth",
                            yolo_ckpt="yolov9c.pt", device="cuda"):
-    """返回 distinct visual objects 数量。"""
+   
     # ----- SAM -----
     from segment_anything import sam_model_registry, SamPredictor
     sam = sam_model_registry["vit_h"](checkpoint=sam_ckpt).to(device)
