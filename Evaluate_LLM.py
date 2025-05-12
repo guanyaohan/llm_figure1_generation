@@ -9,34 +9,6 @@ from openai import OpenAI
 from tqdm import tqdm
 
 
-def pdf_to_png(pdf_path: Path) -> Path:
-    pages = convert_from_path(str(pdf_path), dpi=300, first_page=1, last_page=1)
-    tmp = Path(tempfile.gettempdir()) / (pdf_path.stem + "_page1.png")
-    pages[0].save(tmp, "PNG")
-    return tmp
-
-def svg_to_png(svg_path: Path, dpi=300) -> Path:
-    tmp = Path(tempfile.gettempdir()) / (svg_path.stem + ".png")
-    cairosvg.svg2png(url=str(svg_path), write_to=str(tmp), dpi=dpi)
-    return tmp
-
-def ensure_png(img_path: str) -> Path:
-    p = Path(img_path)
-    suf = p.suffix.lower()
-    if suf in (".png", ".jpg", ".jpeg", ".webp", ".gif"):
-        return p
-    if suf == ".pdf":
-        return pdf_to_png(p)
-    if suf == ".svg":
-        return svg_to_png(p)
-
-    img = Image.open(p)
-    tmp = Path(tempfile.gettempdir()) / (p.stem + ".png")
-    img.save(tmp, "PNG")
-    return tmp
-
-
-# Set the environment variable directly in the Python script
 os.environ["OPENAI_API_KEY"] = ""
 api_key = os.getenv("OPENAI_API_KEY")
 
@@ -85,6 +57,34 @@ SYSTEM_PROMPT = (
 
 "Return ONLY valid JSON with scores and NO commentary."
 )
+
+def pdf_to_png(pdf_path: Path) -> Path:
+    pages = convert_from_path(str(pdf_path), dpi=300, first_page=1, last_page=1)
+    tmp = Path(tempfile.gettempdir()) / (pdf_path.stem + "_page1.png")
+    pages[0].save(tmp, "PNG")
+    return tmp
+
+def svg_to_png(svg_path: Path, dpi=300) -> Path:
+    tmp = Path(tempfile.gettempdir()) / (svg_path.stem + ".png")
+    cairosvg.svg2png(url=str(svg_path), write_to=str(tmp), dpi=dpi)
+    return tmp
+
+def ensure_png(img_path: str) -> Path:
+    p = Path(img_path)
+    suf = p.suffix.lower()
+    if suf in (".png", ".jpg", ".jpeg", ".webp", ".gif"):
+        return p
+    if suf == ".pdf":
+        return pdf_to_png(p)
+    if suf == ".svg":
+        return svg_to_png(p)
+
+    img = Image.open(p)
+    tmp = Path(tempfile.gettempdir()) / (p.stem + ".png")
+    img.save(tmp, "PNG")
+    return tmp
+
+
 
 def score_figure(paper: Dict, png_path: Path, model="gpt-4o-mini") -> Dict[str, int]:
   
