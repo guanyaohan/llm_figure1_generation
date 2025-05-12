@@ -106,7 +106,7 @@ def count_textboxes_donut(img_bgr, device="cuda"):
 
 
 def saliency_bonus(img_bgr, device="cuda"):
-    """Shannon-entropy based bonus ∈ [0, 0.05]，可直接返回 0 跳过。"""
+  
     try:
         from deepgaze_pytorch import get_deepgaze
     except ImportError:
